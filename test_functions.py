@@ -90,3 +90,14 @@ def test_displayItem(capsys):
     displayItem( ["apple", "pear", "grapes", "peach"], 2)
     captured_stdout, captured_stderr = capsys.readouterr()
     assert captured_stdout.strip() == "Your item at 2 index is grapes"
+    
+
+def test_displayItem_integers(capsys):
+    displayItem( [20, 35, 50, 65], 1)
+    captured_stdout, captured_stderr = capsys.readouterr()
+    assert captured_stdout.strip() == "Your item at 1 index is 35"
+
+def test_displayItem_stringIndex(capsys):
+    displayItem(["apple", "pear", "grapes", "peach"], "string")
+    captured_stdout, captured_stderr = capsys.readouterr()
+    assert captured_stdout.strip() == "Please put the right inputs"
