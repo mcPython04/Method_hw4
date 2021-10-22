@@ -13,7 +13,10 @@ def openFile(filename):
 ## takes two numbers and returns
 ## the result of a division
 def numbers(num1, num2):
-    return num1 / num2
+    try:
+        return num1 / num2
+    except(TypeError):
+        print("Type Error! Please enter an integer.")
 
 ## takes in two points
 ## finds the distance between the points

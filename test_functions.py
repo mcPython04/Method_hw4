@@ -32,17 +32,24 @@ def test_numbers(num1, num2, result):
     assert numbers(num1, num2) == result
 
 
+def test_numbers_stringInput(capsys):
+    assert numbers("hello", "hi") is None
+    captured_stdout, captured_stderr = capsys.readouterr()
+    assert captured_stdout.strip() == "Type Error! Please enter an integer."
+
+
 # A(1,-2) and B(3, -2)
-def test_dist():
-    assert dist(1, -2, 3, -2) == 2
+@pytest.mark.parametrize("x1, y1, x2, y2, result", [(1, -2, 3, -2, 2)])
+def test_dist(x1, y1, x2, y2, result):
+    assert dist(x1, y1, x2, y2) == result
 
 
 def test_isPalindrome():
-    assert isPalindrome("racecar") == True
+    assert isPalindrome("racecar") is True
 
 
 def test_isNotPalindrome():
-    assert isPalindrome("testing") == False
+    assert isPalindrome("testing") is False
 
 
 def test_divide(monkeypatch, capsys):
@@ -54,4 +61,12 @@ def test_divide(monkeypatch, capsys):
 
 def test_sq():
     assert sq(81) == 9
+
+
+# pass in name and see if it prints message correctly
+def test_greetUser(capsys):
+    greetUser("Meng", "Xiang", "Chen")
+    captured_stdout, captured_stderr = capsys.readouterr()
+    assert captured_stdout.strip() == "Hello!\nWelcome to the program Meng Xiang Chen\nGlad to have you!"
+
 
