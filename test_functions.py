@@ -60,6 +60,14 @@ def test_isNotPalindrome():
     assert isPalindrome("testing") is False
 
 
+def test_isPalindrome_intInput(capsys):
+    assert isPalindrome(6) is None
+    captured_stdout, captured_stderr = capsys.readouterr()
+    assert captured_stdout.strip() == "Type Error! Please enter a string."
+
+
+
+
 def test_divide(monkeypatch, capsys):
     monkeypatch.setattr('builtins.input', lambda _: next(GEN))
     divide()
