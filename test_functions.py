@@ -46,6 +46,12 @@ def test_dist(x1, y1, x2, y2, result):
     assert dist(x1, y1, x2, y2) == result
 
 
+def test_dist_stringInput(capsys):
+    assert dist('hi', 1, 2, 'world') is None
+    captured_stdout, captured_stderr = capsys.readouterr()
+    assert captured_stdout.strip() == "Type Error! Please enter an integer."
+
+
 def test_isPalindrome():
     assert isPalindrome("racecar") is True
 
