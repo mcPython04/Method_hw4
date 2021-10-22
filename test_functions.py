@@ -12,14 +12,24 @@ def geninputs():
 GEN = geninputs()
 
 
-def test_openFile(capsys):
+# test to see if it works by passing in existing file
+def test_openFile_exist(capsys):
     openFile("testing.txt")
     captured_stdout, captured_stderr = capsys.readouterr()
     assert captured_stdout.strip() == "File opened."
 
 
-def test_numbers():
-    assert numbers(4, 2) == 2
+# test to see if it purposely throws an exception when passing in non-existing file
+def test_openFile_notExist(capsys):
+    openFile("testin.txt")
+    captured_stdout, captured_stderr = capsys.readouterr()
+    assert captured_stdout.strip() == "File open error"
+
+
+# ask if we are testing whole number division
+@pytest.mark.parametrize("num1, num2, result", [(4, 2, 2), (10, 2, 5), (15, 5, 3), (9, 3, 3), (24, 4, 6), (5, 15, (1/3))])
+def test_numbers(num1, num2, result):
+    assert numbers(num1, num2) == result
 
 
 # A(1,-2) and B(3, -2)
@@ -28,8 +38,11 @@ def test_dist():
 
 
 def test_isPalindrome():
-    assert isPalindrome("testing") == False
     assert isPalindrome("racecar") == True
+
+
+def test_isNotPalindrome():
+    assert isPalindrome("testing") == False
 
 
 def test_divide(monkeypatch, capsys):
@@ -41,3 +54,4 @@ def test_divide(monkeypatch, capsys):
 
 def test_sq():
     assert sq(81) == 9
+

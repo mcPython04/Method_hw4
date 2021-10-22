@@ -1,11 +1,14 @@
 import math
 
+
 ## opens a file in read mode
 ## filename received as a parameter
 def openFile(filename):
-    infile = open(filename, "r")
-
-    print("File opened.")
+    try:
+        infile = open(filename, "r")
+        print("File opened.")
+    except:
+        print("File open error")
 
 ## takes two numbers and returns
 ## the result of a division
