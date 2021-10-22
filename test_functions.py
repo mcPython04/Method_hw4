@@ -40,7 +40,8 @@ def test_numbers_stringInput(capsys):
 
 
 # A(1,-2) and B(3, -2)
-@pytest.mark.parametrize("x1, y1, x2, y2, result", [(1, -2, 3, -2, 2)])
+# A(3, 5) and B(4, 5)
+@pytest.mark.parametrize("x1, y1, x2, y2, result", [(1, -2, 3, -2, 2), (3, 5, 4, 5, 1)])
 def test_dist(x1, y1, x2, y2, result):
     assert dist(x1, y1, x2, y2) == result
 
