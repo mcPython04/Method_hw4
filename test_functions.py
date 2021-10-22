@@ -32,6 +32,7 @@ def test_numbers(num1, num2, result):
     assert numbers(num1, num2) == result
 
 
+
 def test_numbers_stringInput(capsys):
     assert numbers("hello", "hi") is None
     captured_stdout, captured_stderr = capsys.readouterr()
@@ -68,5 +69,10 @@ def test_greetUser(capsys):
     greetUser("Meng", "Xiang", "Chen")
     captured_stdout, captured_stderr = capsys.readouterr()
     assert captured_stdout.strip() == "Hello!\nWelcome to the program Meng Xiang Chen\nGlad to have you!"
+    
+def test_displayItem(capsys):
+    displayItem( ["apple", "pear", "grapes", "peach"], 2)
+    captured_stdout, captured_stderr = capsys.readouterr()
+    assert captured_stdout.strip() == "Your item at 2 index is grapes"
 
 
