@@ -8,8 +8,15 @@ def geninputs():
     for item in inputs:
         yield item
 
+def gen_str_inputs():
+    inputs = ['testing', 'testing1']
+
+    for item in inputs:
+        yield item
+
 
 GEN = geninputs()
+GEN1 = gen_str_inputs()
 
 
 # Tests for openFile()
@@ -76,8 +83,8 @@ def test_isPalindrome_intInput(capsys):
     assert captured_stdout.strip() == "Type Error! Please enter a string."
 
 
-
-
+# Tests for divide()
+# testing divide() with inputs 10 and 2
 def test_divide(monkeypatch, capsys):
     monkeypatch.setattr('builtins.input', lambda _: next(GEN))
     divide()
@@ -85,8 +92,30 @@ def test_divide(monkeypatch, capsys):
     assert captured_stdout.strip() == "Your numbers divided is: 5.0"
 
 
-def test_sq():
-    assert sq(81) == 9
+# testing divide() with inputs 'testing' and 'testing1'
+def test_divide_str_input(monkeypatch, capsys):
+    monkeypatch.setattr('builtins.input', lambda _: next(GEN1))
+    divide()
+    captured_stdout, captured_stderr = capsys.readouterr()
+    assert captured_stdout.strip() == "Please input numbers only"
+
+
+# Tests for sq()
+@pytest.mark.parametrize("input, result", [(81, 9), (36, 6), (121, 11)])
+def test_sq(input, result):
+    assert sq(input) == result
+
+
+def test_sq_stringInput(capsys):
+    sq('testing')
+    captured_stdout, captured_stderr = capsys.readouterr()
+    assert captured_stdout.strip() == "Type Error! Please enter an integer"
+
+
+def test_sq_negativeInput(capsys):
+    sq(-9)
+    captured_stdout, captured_stderr = capsys.readouterr()
+    assert captured_stdout.strip() == "Please only input positive numbers!"
 
 
 # Tests for greetUser()

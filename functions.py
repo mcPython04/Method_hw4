@@ -55,19 +55,30 @@ def isPalindrome(temp):
     except TypeError:
         print("Type Error! Please enter a string.")
 
+# Value error when string passed in
 ## has input to receive two numbers
 ## divides the two, then outputs the result
 def divide():
-    num1 = int(input("Enter a number: "))
-    num2 = int(input("Enter another number: "))
+    try:
+        num1 = int(input("Enter a number: "))
+        num2 = int(input("Enter another number: "))
 
-    div = num1 / num2
+        div = num1 / num2
 
-    print("Your numbers divided is:", div)
+        print("Your numbers divided is:", div)
+    except:
+        print("Please input numbers only")
 
 ## returns the squareroot of a particular number
 def sq(num):
-    return math.sqrt(num)
+    try:
+        return math.sqrt(num)
+
+    except TypeError:
+        print("Type Error! Please enter an integer")
+
+    except ValueError:
+        print("Please only input positive numbers!")
 
 
 ## grabs user's name
