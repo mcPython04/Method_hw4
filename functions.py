@@ -5,10 +5,17 @@ import math
 ## filename received as a parameter
 def openFile(filename):
     try:
-        infile = open(filename, "r")
-        print("File opened.")
-    except:
+        if type(filename) == str:
+            infile = open(filename, "r")
+            print("File opened.")
+        else:
+            raise TypeError
+
+    except FileNotFoundError:
         print("File open error")
+
+    except TypeError:
+        print("Filename should only be of string type!")
 
 ## takes two numbers and returns
 ## the result of a division
@@ -45,7 +52,7 @@ def isPalindrome(temp):
         else:
             return False
 
-    except(TypeError):
+    except TypeError:
         print("Type Error! Please enter a string.")
 
 ## has input to receive two numbers
@@ -62,13 +69,22 @@ def divide():
 def sq(num):
     return math.sqrt(num)
 
+
 ## grabs user's name
 ## greets them by their entire name
 ## names should be strings
 def greetUser(first, middle, last):
-    print("Hello!")
-    print("Welcome to the program", first, middle, last)
-    print("Glad to have you!")
+    try:
+        if (type(first) == str) & (type(middle) == str) & (type(last) == str):
+            print("Hello!")
+            print("Welcome to the program", first, middle, last)
+            print("Glad to have you!")
+        else:
+            raise TypeError
+
+    except TypeError:
+        print("Error: Only strings are allowed")
+
 
 ## takes in a Python list
 ## attempts to display the item at the index provided

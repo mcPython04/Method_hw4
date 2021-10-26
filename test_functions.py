@@ -12,6 +12,7 @@ def geninputs():
 GEN = geninputs()
 
 
+# Tests for openFile()
 # test to see if it works by passing in existing file
 def test_openFile_exist(capsys):
     openFile("testing.txt")
@@ -26,11 +27,18 @@ def test_openFile_notExist(capsys):
     assert captured_stdout.strip() == "File open error"
 
 
+# test to see if test purposely throws a TypeError exception when passing in int input
+def test_openFile_intInput(capsys):
+    openFile(6)
+    captured_stdout, captured_stderr = capsys.readouterr()
+    assert captured_stdout.strip() == "Filename should only be of string type!"
+
+
+# Tests for numbers()
 # ask if we are testing whole number division
 @pytest.mark.parametrize("num1, num2, result", [(4, 2, 2), (10, 2, 5), (15, 5, 3), (9, 3, 3), (24, 4, 6), (5, 15, (1/3))])
 def test_numbers(num1, num2, result):
     assert numbers(num1, num2) == result
-
 
 
 def test_numbers_stringInput(capsys):
@@ -39,6 +47,7 @@ def test_numbers_stringInput(capsys):
     assert captured_stdout.strip() == "Type Error! Please enter an integer."
 
 
+# Tests for dist()
 # A(1,-2) and B(3, -2)
 # A(3, 5) and B(4, 5)
 @pytest.mark.parametrize("x1, y1, x2, y2, result", [(1, -2, 3, -2, 2), (3, 5, 4, 5, 1)])
@@ -52,6 +61,7 @@ def test_dist_stringInput(capsys):
     assert captured_stdout.strip() == "Type Error! Please enter an integer."
 
 
+# Tests for isPalindrome()
 def test_isPalindrome():
     assert isPalindrome("racecar") is True
 
@@ -79,6 +89,7 @@ def test_sq():
     assert sq(81) == 9
 
 
+# Tests for greetUser()
 # pass in name and see if it prints message correctly
 def test_greetUser(capsys):
     greetUser("Meng", "Xiang", "Chen")
@@ -86,6 +97,19 @@ def test_greetUser(capsys):
     assert captured_stdout.strip() == "Hello!\nWelcome to the program Meng Xiang Chen\nGlad to have you!"
 
 
+def test_greetUser_integer_input(capsys):
+    greetUser(6, 4, 1)
+    captured_stdout, captured_stderr = capsys.readouterr()
+    assert captured_stdout.strip() == "Error: Only strings are allowed"
+
+
+def test_greetUser_bool_input(capsys):
+    greetUser(True, True, True)
+    captured_stdout, captured_stderr = capsys.readouterr()
+    assert captured_stdout.strip() == "Error: Only strings are allowed"
+
+
+# Tests for displayItem()
 def test_displayItem(capsys):
     displayItem( ["apple", "pear", "grapes", "peach"], 2)
     captured_stdout, captured_stderr = capsys.readouterr()
@@ -96,6 +120,7 @@ def test_displayItem_integers(capsys):
     displayItem( [20, 35, 50, 65], 1)
     captured_stdout, captured_stderr = capsys.readouterr()
     assert captured_stdout.strip() == "Your item at 1 index is 35"
+
 
 def test_displayItem_stringIndex(capsys):
     displayItem(["apple", "pear", "grapes", "peach"], "string")
