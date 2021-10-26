@@ -2,11 +2,20 @@ import pytest
 from functions import *
 
 
+# generate inputs for testing divide()
 def geninputs():
     inputs = [10, 2]
 
     for item in inputs:
         yield item
+
+
+def geninputs1():
+    inputs = [56, 7]
+
+    for item in inputs:
+        yield item
+
 
 def gen_str_inputs():
     inputs = ['testing', 'testing1']
@@ -16,7 +25,8 @@ def gen_str_inputs():
 
 
 GEN = geninputs()
-GEN1 = gen_str_inputs()
+GEN1 = geninputs1()
+GEN2 = gen_str_inputs()
 
 
 # Tests for openFile()
@@ -92,9 +102,17 @@ def test_divide(monkeypatch, capsys):
     assert captured_stdout.strip() == "Your numbers divided is: 5.0"
 
 
+# testing divide() with inputs 56 and 7
+def test_divide1(monkeypatch, capsys):
+    monkeypatch.setattr('builtins.input', lambda _: next(GEN1))
+    divide()
+    captured_stdout, captured_stderr = capsys.readouterr()
+    assert captured_stdout.strip() == "Your numbers divided is: 8.0"
+
+
 # testing divide() with inputs 'testing' and 'testing1'
 def test_divide_str_input(monkeypatch, capsys):
-    monkeypatch.setattr('builtins.input', lambda _: next(GEN1))
+    monkeypatch.setattr('builtins.input', lambda _: next(GEN2))
     divide()
     captured_stdout, captured_stderr = capsys.readouterr()
     assert captured_stdout.strip() == "Please input numbers only"
