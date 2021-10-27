@@ -139,9 +139,9 @@ def test_sq_negativeInput(capsys):
 # Tests for greetUser()
 # pass in name and see if it prints message correctly
 def test_greetUser(capsys):
-    greetUser("Meng", "Xiang", "Chen")
+    greetUser("John", "Smith", "Adams")
     captured_stdout, captured_stderr = capsys.readouterr()
-    assert captured_stdout.strip() == "Hello!\nWelcome to the program Meng Xiang Chen\nGlad to have you!"
+    assert captured_stdout.strip() == "Hello!\nWelcome to the program John Smith Adams\nGlad to have you!"
 
 
 def test_greetUser_integer_input(capsys):
